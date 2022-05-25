@@ -1,0 +1,5 @@
+com\mrt\testRunner\CustomStrategy.class
+com\mrt\testRunner\GlobalHooks.class
+com\mrt\testRunner\RegressionRunner.class
+com\mrt\testRunner\FailedRunner.class
+com\mrt\testRunner\TestRunner.class
