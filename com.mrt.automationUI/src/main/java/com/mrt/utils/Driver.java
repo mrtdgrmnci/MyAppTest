@@ -29,6 +29,8 @@ import org.openqa.selenium.remote.CapabilityType;
 import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import static org.openqa.selenium.chrome.ChromeOptions.LOGGING_PREFS;
+
 public class Driver {
 
     private static final ThreadLocal<WebDriver> driverPool = new ThreadLocal<>();
@@ -56,7 +58,7 @@ public class Driver {
             }
 
             switch (browser) {
-                case "chrome":
+                case "chrome" -> {
                     ChromeOptions chromeOptions = new ChromeOptions();
                     WebDriverManager.chromedriver().setup();
                     HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
@@ -69,12 +71,12 @@ public class Driver {
                     chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
                     driverPool.set(new ChromeDriver(chromeOptions));
                     driverPool.get().manage().deleteAllCookies();
-                    break;
-                case "chrome-headless":
+                }
+                case "chrome-headless" -> {
                     ChromeOptions chromeHeadlessOptions = new ChromeOptions();
                     LoggingPreferences chromeLogs = new LoggingPreferences();
                     chromeLogs.enable(LogType.BROWSER, Level.ALL);
-                    chromeHeadlessOptions.setCapability(CapabilityType.LOGGING_PREFS, chromeLogs);
+                    chromeHeadlessOptions.setCapability(LOGGING_PREFS, chromeLogs);
                     chromeHeadlessOptions.setAcceptInsecureCerts(true);
                     WebDriverManager.chromedriver().setup();
                     HashMap<String, Object> headlessChromePrefs = new HashMap<String, Object>();
@@ -94,8 +96,8 @@ public class Driver {
                     driverPool.get().manage().deleteAllCookies();
                     Dimension dimension = new Dimension(1936, 1056);
                     driverPool.get().manage().window().setSize(dimension);
-                    break;
-                case "firefox":
+                }
+                case "firefox" -> {
                     WebDriverManager.firefoxdriver().setup();
                     // Creating firefox profile
                     FirefoxProfile profile = new FirefoxProfile();
@@ -111,8 +113,8 @@ public class Driver {
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     firefoxOptions.setProfile(profile);
                     driverPool.set(new FirefoxDriver(firefoxOptions));
-                    break;
-                case "firefox-headless":
+                }
+                case "firefox-headless" -> {
                     WebDriverManager.firefoxdriver().setup();
                     // Creating firefox profile
                     FirefoxProfile firefoxHeadlessProfile = new FirefoxProfile();
@@ -129,8 +131,8 @@ public class Driver {
                     firefoxHeadlessOptions.setHeadless(true);
                     firefoxHeadlessOptions.setProfile(firefoxHeadlessProfile);
                     driverPool.set(new FirefoxDriver(firefoxHeadlessOptions));
-                    break;
-                case "edge":
+                }
+                case "edge" -> {
                     WebDriverManager.edgedriver().setup();
                     EdgeOptions edgeOptions = new EdgeOptions();
                     EdgeDriverService edgeDriverService = EdgeDriverService.createDefaultService();
@@ -144,8 +146,8 @@ public class Driver {
                     paramsEdge.put("downloadPath", downloadPath);
                     commandParamsEdge.put("params", paramsEdge);
                     driverPool.set(new EdgeDriver(edgeDriverService, edgeOptions));
-                    break;
-                case "edge-headless":
+                }
+                case "edge-headless" -> {
                     WebDriverManager.edgedriver().setup();
                     EdgeOptions edgeHeadlessOptions = new EdgeOptions();
                     edgeHeadlessOptions.addArguments("-inprivate");
@@ -162,10 +164,8 @@ public class Driver {
                     paramsEdgeHeadless.put("downloadPath", downloadPathHeadless);
                     commandParamsEdgeHeadless.put("params", paramsEdgeHeadless);
                     driverPool.set(new EdgeDriver(edgeDriverServiceHeadless, edgeHeadlessOptions));
-                    break;
-
-                default:
-                    throw new RuntimeException("Wrong browser name!");
+                }
+                default -> throw new RuntimeException("Wrong browser name!");
             }
         }
         return driverPool.get();
@@ -192,7 +192,7 @@ public class Driver {
                 ChromeOptions chromeHeadlessOptions = new ChromeOptions();
                 LoggingPreferences chromeLogs = new LoggingPreferences();
                 chromeLogs.enable(LogType.BROWSER, Level.ALL);
-                chromeHeadlessOptions.setCapability(CapabilityType.LOGGING_PREFS, chromeLogs);
+                chromeHeadlessOptions.setCapability(LOGGING_PREFS, chromeLogs);
                 chromeHeadlessOptions.setAcceptInsecureCerts(true);
                 WebDriverManager.chromedriver().setup();
                 HashMap<String, Object> headlessChromePrefs = new HashMap<String, Object>();

@@ -10,7 +10,6 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExamplePojo {
 
-    private int myId;
-    private String myName;
+	
 
 }

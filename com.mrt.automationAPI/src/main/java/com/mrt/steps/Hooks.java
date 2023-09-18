@@ -13,8 +13,8 @@ public class Hooks {
 
 @Before
 public void setup() {
-	
-	baseURI=ConfigReader.getProperty("URL");
+
+	System.out.println(baseURI = ConfigReader.getProperty("URL")+"baseee");
 }
 
 @After
