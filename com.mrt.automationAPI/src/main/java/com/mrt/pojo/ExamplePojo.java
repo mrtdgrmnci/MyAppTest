@@ -5,11 +5,8 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExamplePojo {
-
-	
-
+    // Add fields here as needed
 }

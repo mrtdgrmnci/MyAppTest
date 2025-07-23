@@ -13,7 +13,7 @@ public class EncryptionUtils {
 
     public static String decrypt(String property){
         String decodedStr=null;
-        if ((org.apache.commons.lang.StringUtils.isNotBlank(property)) && (Base64.isBase64(property)))
+        if ((property != null && !property.trim().isEmpty()) && (Base64.isBase64(property)))
             decodedStr=new String(Base64.decodeBase64(property));
         return decodedStr;
     }
