@@ -1,7 +1,6 @@
 package com.mrt.utils;
 
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.*;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.nio.file.Paths;
 
 public class passJsonFileAsPayload {
 
-    @Test
     public void createUser(){
 
         File jsonData =new File("src/test/resources/Schemas/exampleJSON.json");
@@ -29,7 +27,6 @@ public class passJsonFileAsPayload {
                 .contentType(ContentType.ANY);
     }
 
-    @Test
     public void createUser2() throws IOException {
 
         byte[] inp = Files.readAllBytes(Paths.get("src/test/resources/Schemas/exampleJSON.json"));
